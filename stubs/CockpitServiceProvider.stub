@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Providers;
+
+use Cockpit\CockpitApplicationServiceProvider;
+
+class CockpitServiceProvider extends CockpitApplicationServiceProvider
+{
+    public function boot()
+    {
+    }
+}
