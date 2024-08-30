@@ -44,7 +44,7 @@ class LivewireContext implements ContextInterface
             return 'v3';
         }
 
-        Log::info('Cockpit - Couldn\'t recognize Livewire version');
+        Log::info('Debugmate - Couldn\'t recognize Livewire version');
 
         return '';
     }

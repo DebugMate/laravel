@@ -130,7 +130,7 @@ class JobContext implements ContextInterface, RecorderInterface
     protected function resolveJobChain(array $chainedCommands, int $maxDepth): array
     {
         if ($maxDepth === 0) {
-            return ['Cockpit stopped recording jobs after this point since the max chain depth was reached'];
+            return ['Debugmate stopped recording jobs after this point since the max chain depth was reached'];
         }
 
         return array_map(function (string $command) use ($maxDepth) {

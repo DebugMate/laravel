@@ -2,12 +2,12 @@
 
 namespace Debugmate;
 
-use Debugmate\Console\InstallCockpitCommand;
-use Debugmate\Console\TestCockpitCommand;
+use Debugmate\Console\InstallDebugmateCommand;
+use Debugmate\Console\TestDebugmateCommand;
 use Debugmate\Context\DumpContext;
 use Debugmate\Context\JobContext;
 use Debugmate\Context\RequestContext;
-use Debugmate\Exceptions\CockpitErrorHandler;
+use Debugmate\Exceptions\DebugmateErrorHandler;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Support\Str;
@@ -15,7 +15,7 @@ use InvalidArgumentException;
 use Monolog\Level;
 use Monolog\Logger;
 
-class CockpitServiceProvider extends BaseServiceProvider
+class DebugmateServiceProvider extends BaseServiceProvider
 {
     public function register(): void
     {
@@ -38,7 +38,7 @@ class CockpitServiceProvider extends BaseServiceProvider
             ->bootMacros()
             ->configureQueue();
 
-        $this->mergeConfigFrom(DEBUGMATE_PATH . '/config/cockpit.php', 'cockpit');
+        $this->mergeConfigFrom(DEBUGMATE_PATH . '/config/debugmate.php', 'debugmate');
     }
 
     public function bootMacros(): self
@@ -54,8 +54,8 @@ class CockpitServiceProvider extends BaseServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                InstallCockpitCommand::class,
-                TestCockpitCommand::class,
+                InstallDebugmateCommand::class,
+                TestDebugmateCommand::class,
             ]);
         }
 
@@ -66,16 +66,16 @@ class CockpitServiceProvider extends BaseServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $configPath = function_exists('config_path')
-                ? config_path('cockpit.php')
-                : base_path('config/cockpit.php');
+                ? config_path('debugmate.php')
+                : base_path('config/debugmate.php');
 
             $this->publishes([
-                DEBUGMATE_PATH . '/config/cockpit.php' => $configPath,
-            ], 'cockpit-config');
+                DEBUGMATE_PATH . '/config/debugmate.php' => $configPath,
+            ], 'debugmate-config');
 
             $this->publishes([
-                DEBUGMATE_PATH . '/stubs/CockpitServiceProvider.stub' => app_path('Providers/CockpitServiceProvider.php'),
-            ], 'cockpit-provider');
+                DEBUGMATE_PATH . '/stubs/DebugmateServiceProvider.stub' => app_path('Providers/DebugmateServiceProvider.php'),
+            ], 'debugmate-provider');
         }
 
         return $this;
@@ -83,23 +83,23 @@ class CockpitServiceProvider extends BaseServiceProvider
 
     protected function registerErrorHandler(): void
     {
-        $this->app->singleton('cockpit.logger', function () {
-            $handler = new CockpitErrorHandler();
+        $this->app->singleton('debugmate.logger', function () {
+            $handler = new DebugmateErrorHandler();
 
             $handler->setMinimumLogLevel(
                 $this->getLogLevel()
             );
 
             return tap(
-                new Logger('Cockpit'),
+                new Logger('Debugmate'),
                 function (Logger $logger) use ($handler) {
                     return $logger->pushHandler($handler);
                 }
             );
         });
 
-        Log::extend('cockpit', function ($app) {
-            return $app['cockpit.logger'];
+        Log::extend('debugmate', function ($app) {
+            return $app['debugmate.logger'];
         });
     }
 
@@ -140,7 +140,7 @@ class CockpitServiceProvider extends BaseServiceProvider
 
     protected function getLogLevel(): Level
     {
-        $logLevel = config('logging.channels.cockpit.level', Level::Error->value);
+        $logLevel = config('logging.channels.debugmate.level', Level::Error->value);
 
         $logLevel = Level::tryFrom((int)$logLevel);
 

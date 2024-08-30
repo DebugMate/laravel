@@ -36,7 +36,7 @@ class LivewireInformationV3
                 'message' => $throwable->getMessage()
             ];
 
-            Log::info('Cockpit - Couldn\'t get livewire class:', $context);
+            Log::info('Debugmate - Couldn\'t get livewire class:', $context);
         }
 
         return [

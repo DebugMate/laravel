@@ -2,7 +2,7 @@
 
 namespace Debugmate\Console;
 
-use Debugmate\Exceptions\CockpitErrorHandler;
+use Debugmate\Exceptions\DebugmateErrorHandler;
 use Exception;
 use Illuminate\Console\Command;
 use Monolog\DateTimeImmutable;
@@ -10,7 +10,7 @@ use Monolog\Level;
 use Monolog\LogRecord;
 use Symfony\Component\Console\Command\Command as Status;
 
-class TestCockpitCommand extends Command
+class TestDebugmateCommand extends Command
 {
     protected $signature = 'debugmate:test';
 
@@ -31,7 +31,7 @@ class TestCockpitCommand extends Command
         }
 
         if (!config('logging.channels.debugmate.driver')) {
-            $this->error('Cockpit logging config not found. Add it to config/logging.php');
+            $this->error('Debugmate logging config not found. Add it to config/logging.php');
 
             $sample = <<<CODE
 'channels' => [
@@ -48,7 +48,7 @@ CODE;
         }
 
         if (!in_array('debugmate', config('logging.channels.stack.channels'))) {
-            $this->error('Cockpit logging config not found at stack channels. Fill environment LOG_STACK with "debugmate"');
+            $this->error('Debugmate logging config not found at stack channels. Fill environment LOG_STACK with "debugmate"');
 
             $code = <<<CODE
 // ...
@@ -61,8 +61,8 @@ CODE;
             return Status::FAILURE;
         }
 
-        /** @var CockpitErrorHandler $errorHandler */
-        $errorHandler = app(CockpitErrorHandler::class);
+        /** @var DebugmateErrorHandler $errorHandler */
+        $errorHandler = app(DebugmateErrorHandler::class);
         $errorHandler->handle(new LogRecord(
             datetime: new DateTimeImmutable(true),
             channel: 'debugmate',
@@ -74,14 +74,14 @@ CODE;
         ));
 
         if ($errorHandler->failed() === true || $errorHandler->failed() === null) {
-            $this->error('We couldn\'t reach Cockpit Server at ' . config('debugmate.domain'));
+            $this->error('We couldn\'t reach Debugmate Server at ' . config('debugmate.domain'));
             $this->error($errorHandler->reason());
 
             return Status::FAILURE;
         }
 
         $this->info(
-            "Cockpit reached successfully. We sent a test Exception that has been registered."
+            "Debugmate reached successfully. We sent a test Exception that has been registered."
         );
 
         return Status::SUCCESS;

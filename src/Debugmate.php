@@ -5,7 +5,7 @@ namespace Debugmate;
 use Closure;
 use Illuminate\Http\Request;
 
-class Cockpit
+class Debugmate
 {
     public const TYPE_WEB = 'web';
     public const TYPE_CLI = 'cli';

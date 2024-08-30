@@ -2,7 +2,7 @@
 
 namespace Debugmate\Exceptions;
 
-use Debugmate\Cockpit
+use Debugmate\Debugmate;
 use Debugmate\Context\AppContext;
 use Debugmate\Context\CommandContext;
 use Debugmate\Context\DumpContext;
@@ -21,7 +21,7 @@ use Monolog\Level;
 use Monolog\LogRecord;
 use Throwable;
 
-class CockpitErrorHandler extends AbstractProcessingHandler
+class DebugmateErrorHandler extends AbstractProcessingHandler
 {
     protected $minimumLogLevel = Level::Error;
 
@@ -68,14 +68,14 @@ class CockpitErrorHandler extends AbstractProcessingHandler
 
     protected function log(Throwable $throwable, array $context = []): void
     {
-        if (!config('cockpit.enabled')) {
-            Log::info('Cockpit - Not enabled');
+        if (!config('debugmate.enabled')) {
+            Log::info('Debugmate - Not enabled');
 
             return;
         }
 
-        if (!config('cockpit.domain')) {
-            Log::info('Cockpit - You need to fill DEBUGMATE_DOMAIN env with a valid cockpit endpoint');
+        if (!config('debugmate.domain')) {
+            Log::info('Debugmate - You need to fill DEBUGMATE_DOMAIN env with a valid debugmate endpoint');
 
             return;
         }
@@ -91,9 +91,9 @@ class CockpitErrorHandler extends AbstractProcessingHandler
             $requestContext     = app(RequestContext::class);
             $environmentContext = app(EnvironmentContext::class);
 
-            $endpoint = Str::finish(config('cockpit.domain'), '/') . 'webhook';
+            $endpoint = Str::finish(config('debugmate.domain'), '/') . 'webhook';
 
-            $this->response = Http::withHeaders(['X-DEBUGMATE-TOKEN' => config('cockpit.token')])
+            $this->response = Http::withHeaders(['X-DEBUGMATE-TOKEN' => config('debugmate.token')])
                 ->post($endpoint, [
                     'exception'   => get_class($throwable),
                     'message'     => $throwable->getMessage(),
@@ -120,7 +120,7 @@ class CockpitErrorHandler extends AbstractProcessingHandler
                 'message' => $throwable->getMessage()
             ];
 
-            Log::info('Cockpit - Couldn\'t send info to server, error:', $context);
+            Log::info('Debugmate - Couldn\'t send info to server, error:', $context);
         }
     }
 
@@ -148,10 +148,10 @@ class CockpitErrorHandler extends AbstractProcessingHandler
     protected function getExceptionType(): string
     {
         if (!app()->runningInConsole()) {
-            return Cockpit::TYPE_WEB;
+            return Debugmate::TYPE_WEB;
         }
 
-        return $this->isExceptionFromJob() ? Cockpit::TYPE_JOB : Cockpit::TYPE_CLI;
+        return $this->isExceptionFromJob() ? Debugmate::TYPE_JOB : Debugmate::TYPE_CLI;
     }
 
     protected function isExceptionFromJob(): bool

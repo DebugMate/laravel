@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
-class InstallCockpitCommand extends Command
+class InstallDebugmateCommand extends Command
 {
     protected $signature = 'debugmate:install
         {--C|config : Install the config file}
@@ -46,10 +46,10 @@ class InstallCockpitCommand extends Command
             return;
         }
 
-        $providerPath = app_path('Providers/CockpitServiceProvider.php');
+        $providerPath = app_path('Providers/DebugmateServiceProvider.php');
 
         $this->publish('provider', $providerPath);
-        $this->registerCockpitServiceProvider();
+        $this->registerDebugmateServiceProvider();
     }
 
     private function publishEnv(): void
@@ -112,7 +112,7 @@ class InstallCockpitCommand extends Command
         }
 
         $params = [
-            '--provider' => "Debugmate\CockpitServiceProvider",
+            '--provider' => "Debugmate\DebugmateServiceProvider",
             '--tag'      => "debugmate-{$fileType}",
         ];
 
@@ -123,11 +123,11 @@ class InstallCockpitCommand extends Command
         $this->call('vendor:publish', $params);
     }
 
-    private function registerCockpitServiceProvider(): void
+    private function registerDebugmateServiceProvider(): void
     {
         $namespace = Str::replaceLast('\\', '', $this->laravel->getNamespace());
 
-        $serviceProviderPath = app_path('Providers/CockpitServiceProvider.php');
+        $serviceProviderPath = app_path('Providers/DebugmateServiceProvider.php');
 
         file_put_contents(
             $serviceProviderPath,
@@ -138,6 +138,6 @@ class InstallCockpitCommand extends Command
             )
         );
 
-        ServiceProvider::addProviderToBootstrapFile("{$namespace}\Providers\CockpitServiceProvider");
+        ServiceProvider::addProviderToBootstrapFile("{$namespace}\Providers\DebugmateServiceProvider");
     }
 }

@@ -28,7 +28,7 @@ composer require debugmate/laravel
 php artisan debugmate:install
 ```
 
-#### Configuring cockpit connection
+#### Configuring DebugMate connection
 After the installation, you should configure the connection with DebugMate main application.
 Open your `.env` file and check for this new env vars:
 

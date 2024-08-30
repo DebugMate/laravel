@@ -60,7 +60,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Debugmate\\CockpitServiceProvider"
+                "Debugmate\\DebugmateServiceProvider"
             ]
         }
     },

@@ -4,6 +4,6 @@ namespace Debugmate;
 
 use Illuminate\Support\ServiceProvider;
 
-class CockpitApplicationServiceProvider extends ServiceProvider
+class DebugmateApplicationServiceProvider extends ServiceProvider
 {
 }
