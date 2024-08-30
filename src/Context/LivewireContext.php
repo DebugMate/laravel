@@ -1,10 +1,10 @@
 <?php
 
-namespace Cockpit\Context;
+namespace Debugmate\Context;
 
-use Cockpit\Context\Livewire\LivewireInformationV2;
-use Cockpit\Context\Livewire\LivewireInformationV3;
-use Cockpit\Interfaces\ContextInterface;
+use Debugmate\Context\Livewire\LivewireInformationV2;
+use Debugmate\Context\Livewire\LivewireInformationV3;
+use Debugmate\Interfaces\ContextInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 

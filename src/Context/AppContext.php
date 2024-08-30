@@ -1,9 +1,9 @@
 <?php
 
-namespace Cockpit\Context;
+namespace Debugmate\Context;
 
-use Cockpit\Exceptions\ViewException;
-use Cockpit\Interfaces\ContextInterface;
+use Debugmate\Exceptions\ViewException;
+use Debugmate\Interfaces\ContextInterface;
 use Illuminate\Foundation\Application;
 use Throwable;
 

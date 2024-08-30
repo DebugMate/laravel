@@ -1,13 +1,13 @@
 <?php
 
-namespace Cockpit;
+namespace Debugmate;
 
-use Cockpit\Console\InstallCockpitCommand;
-use Cockpit\Console\TestCockpitCommand;
-use Cockpit\Context\DumpContext;
-use Cockpit\Context\JobContext;
-use Cockpit\Context\RequestContext;
-use Cockpit\Exceptions\CockpitErrorHandler;
+use Debugmate\Console\InstallCockpitCommand;
+use Debugmate\Console\TestCockpitCommand;
+use Debugmate\Context\DumpContext;
+use Debugmate\Context\JobContext;
+use Debugmate\Context\RequestContext;
+use Debugmate\Exceptions\CockpitErrorHandler;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Support\Str;
@@ -19,12 +19,12 @@ class CockpitServiceProvider extends BaseServiceProvider
 {
     public function register(): void
     {
-        if (!defined('COCKPIT_PATH')) {
-            define('COCKPIT_PATH', realpath(__DIR__ . '/../'));
+        if (!defined('DEBUGMATE_PATH')) {
+            define('DEBUGMATE_PATH', realpath(__DIR__ . '/../'));
         }
 
-        if (!defined('COCKPIT_REPO')) {
-            define('COCKPIT_REPO', 'https://github.com/devsquad-cockpit/laravel');
+        if (!defined('DEBUGMATE_REPO')) {
+            define('DEBUGMATE_REPO', 'https://github.com/DebugMate/laravel');
         }
 
         $this->registerErrorHandler();
@@ -38,7 +38,7 @@ class CockpitServiceProvider extends BaseServiceProvider
             ->bootMacros()
             ->configureQueue();
 
-        $this->mergeConfigFrom(COCKPIT_PATH . '/config/cockpit.php', 'cockpit');
+        $this->mergeConfigFrom(DEBUGMATE_PATH . '/config/cockpit.php', 'cockpit');
     }
 
     public function bootMacros(): self
@@ -70,11 +70,11 @@ class CockpitServiceProvider extends BaseServiceProvider
                 : base_path('config/cockpit.php');
 
             $this->publishes([
-                COCKPIT_PATH . '/config/cockpit.php' => $configPath,
+                DEBUGMATE_PATH . '/config/cockpit.php' => $configPath,
             ], 'cockpit-config');
 
             $this->publishes([
-                COCKPIT_PATH . '/stubs/CockpitServiceProvider.stub' => app_path('Providers/CockpitServiceProvider.php'),
+                DEBUGMATE_PATH . '/stubs/CockpitServiceProvider.stub' => app_path('Providers/CockpitServiceProvider.php'),
             ], 'cockpit-provider');
         }
 
@@ -141,9 +141,9 @@ class CockpitServiceProvider extends BaseServiceProvider
     protected function getLogLevel(): Level
     {
         $logLevel = config('logging.channels.cockpit.level', Level::Error->value);
-        
+
         $logLevel = Level::tryFrom((int)$logLevel);
-        
+
         if (!$logLevel) {
             throw new InvalidArgumentException('The given log level is invalid');
         }

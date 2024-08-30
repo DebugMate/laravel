@@ -1,17 +1,17 @@
 <?php
 
-namespace Cockpit\Exceptions;
+namespace Debugmate\Exceptions;
 
-use Cockpit\Cockpit;
-use Cockpit\Context\AppContext;
-use Cockpit\Context\CommandContext;
-use Cockpit\Context\DumpContext;
-use Cockpit\Context\EnvironmentContext;
-use Cockpit\Context\JobContext;
-use Cockpit\Context\LivewireContext;
-use Cockpit\Context\RequestContext;
-use Cockpit\Context\StackTraceContext;
-use Cockpit\Context\UserContext;
+use Debugmate\Cockpit
+use Debugmate\Context\AppContext;
+use Debugmate\Context\CommandContext;
+use Debugmate\Context\DumpContext;
+use Debugmate\Context\EnvironmentContext;
+use Debugmate\Context\JobContext;
+use Debugmate\Context\LivewireContext;
+use Debugmate\Context\RequestContext;
+use Debugmate\Context\StackTraceContext;
+use Debugmate\Context\UserContext;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -75,7 +75,7 @@ class CockpitErrorHandler extends AbstractProcessingHandler
         }
 
         if (!config('cockpit.domain')) {
-            Log::info('Cockpit - You need to fill COCKPIT_DOMAIN env with a valid cockpit endpoint');
+            Log::info('Cockpit - You need to fill DEBUGMATE_DOMAIN env with a valid cockpit endpoint');
 
             return;
         }
@@ -93,7 +93,7 @@ class CockpitErrorHandler extends AbstractProcessingHandler
 
             $endpoint = Str::finish(config('cockpit.domain'), '/') . 'webhook';
 
-            $this->response = Http::withHeaders(['X-COCKPIT-TOKEN' => config('cockpit.token')])
+            $this->response = Http::withHeaders(['X-DEBUGMATE-TOKEN' => config('cockpit.token')])
                 ->post($endpoint, [
                     'exception'   => get_class($throwable),
                     'message'     => $throwable->getMessage(),

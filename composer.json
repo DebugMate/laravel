@@ -1,6 +1,6 @@
 {
-    "name": "devsquad-cockpit/laravel",
-    "description": "A Freemium package to help you tracking the project errors",
+    "name": "debugmate/laravel",
+    "description": "A package to help you tracking the project errors",
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Cockpit\\": "src/"
+            "Debugmate\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -36,7 +36,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Cockpit\\Tests\\": "tests/"
+            "Debugmate\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -60,7 +60,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Cockpit\\CockpitServiceProvider"
+                "Debugmate\\CockpitServiceProvider"
             ]
         }
     },

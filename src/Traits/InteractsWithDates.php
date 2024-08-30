@@ -1,6 +1,6 @@
 <?php
 
-namespace Cockpit\Traits;
+namespace Debugmate\Traits;
 
 use Carbon\Carbon;
 

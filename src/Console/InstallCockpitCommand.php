@@ -1,6 +1,6 @@
 <?php
 
-namespace Cockpit\Console;
+namespace Debugmate\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -9,29 +9,29 @@ use Illuminate\Support\Str;
 
 class InstallCockpitCommand extends Command
 {
-    protected $signature = 'cockpit:install
+    protected $signature = 'debugmate:install
         {--C|config : Install the config file}
         {--P|provider : Install service provider}
         {--F|force : Overwrite existing files}';
 
-    protected $description = 'Create the config files for Cockpit.';
+    protected $description = 'Create the config files for DebugMate.';
 
     public function handle(): void
     {
-        $this->info('Installing Cockpit...');
+        $this->info('Installing DebugMate...');
 
         $this->publishConfig();
         $this->publishProvider();
         $this->publishEnv();
 
-        $this->info('Installed Cockpit.');
+        $this->info('Installed DebugMate.');
     }
 
     private function publishConfig(): void
     {
         $configPath = function_exists('config_path')
-            ? config_path('cockpit.php')
-            : base_path('config/cockpit.php');
+            ? config_path('debugmate.php')
+            : base_path('config/debugmate.php');
 
         if (!$this->option('config') && $this->fileExists($configPath)) {
             return;
@@ -62,16 +62,16 @@ class InstallCockpitCommand extends Command
 
         $envContent = file_get_contents($env);
 
-        if (Str::contains($envContent, 'COCKPIT_DOMAIN')) {
+        if (Str::contains($envContent, 'DEBUGMATE_DOMAIN')) {
             $this->info('Required env vars already exist');
 
             return;
         }
 
         $envContent .= PHP_EOL;
-        $envContent .= 'COCKPIT_DOMAIN=http://localhost' . PHP_EOL;
-        $envContent .= 'COCKPIT_ENABLED=true' . PHP_EOL;
-        $envContent .= 'COCKPIT_TOKEN=' . PHP_EOL;
+        $envContent .= 'DEBUGMATE_DOMAIN=http://localhost' . PHP_EOL;
+        $envContent .= 'DEBUGMATE_ENABLED=true' . PHP_EOL;
+        $envContent .= 'DEBUGMATE_TOKEN=' . PHP_EOL;
 
         file_put_contents($env, $envContent);
 
@@ -112,8 +112,8 @@ class InstallCockpitCommand extends Command
         }
 
         $params = [
-            '--provider' => "Cockpit\CockpitServiceProvider",
-            '--tag'      => "cockpit-{$fileType}",
+            '--provider' => "Debugmate\CockpitServiceProvider",
+            '--tag'      => "debugmate-{$fileType}",
         ];
 
         if ($forcePublish === true) {

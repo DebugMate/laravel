@@ -1,6 +1,6 @@
 <?php
 
-namespace Cockpit\Context\Livewire;
+namespace Debugmate\Context\Livewire;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;

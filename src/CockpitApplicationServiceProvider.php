@@ -1,6 +1,6 @@
 <?php
 
-namespace Cockpit;
+namespace Debugmate;
 
 use Illuminate\Support\ServiceProvider;
 

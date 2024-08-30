@@ -9,7 +9,7 @@ return [
      | This setting controls the Cockpit status.
      |
      */
-    'enabled' => env('COCKPIT_ENABLED', true),
+    'enabled' => env('DEBUGMATE_ENABLED', true),
 
     /*
      |--------------------------------------------------------------------------
@@ -19,7 +19,7 @@ return [
      | This setting refers to the domain (base URL) of the Cockpit.
      |
      */
-    'domain' => env('COCKPIT_DOMAIN'),
+    'domain' => env('DEBUGMATE_DOMAIN'),
 
     /*
      |--------------------------------------------------------------------------
@@ -30,5 +30,5 @@ return [
      | in the Cockpit where the errors will be registered.
      |
      */
-    'token' => env('COCKPIT_TOKEN'),
+    'token' => env('DEBUGMATE_TOKEN'),
 ];

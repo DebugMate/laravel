@@ -1,9 +1,9 @@
 <?php
 
-namespace Cockpit\Context;
+namespace Debugmate\Context;
 
-use Cockpit\Interfaces\ContextInterface;
-use Cockpit\Interfaces\RecorderInterface;
+use Debugmate\Interfaces\ContextInterface;
+use Debugmate\Interfaces\RecorderInterface;
 use DateTime;
 use Error;
 use Exception;
