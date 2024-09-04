@@ -9,14 +9,10 @@ use Throwable;
 
 class AppContext implements ContextInterface
 {
-    protected $app;
-
-    protected $throwable;
-
-    public function __construct(Application $app, Throwable $throwable)
-    {
-        $this->app       = $app;
-        $this->throwable = $throwable;
+    public function __construct(
+        protected Application $app,
+        protected Throwable $throwable
+    ) {
     }
 
     public function getContext(): array
@@ -26,17 +22,17 @@ class AppContext implements ContextInterface
         }
 
         $route  = $this->app['router']->current();
-        $action = $route->getAction();
+        $action = $route?->getAction();
 
         $isViewException = $this->throwable instanceof ViewException;
 
         return [
-            'controller' => $route->getActionName(),
+            'controller' => $route?->getActionName(),
             'route'      => [
-                'name'       => $action['as'] ?? 'generated::' . md5($route->getActionName()),
-                'parameters' => $route->parameters(),
+                'name'       => $action['as'] ?? 'generated::' . md5($route?->getActionName()),
+                'parameters' => $route?->parameters(),
             ],
-            'middlewares' => $route->computedMiddleware,
+            'middlewares' => $route?->computedMiddleware,
             'view'        => [
                 'name' => $isViewException ? $this->throwable->getFile() : null,
                 'data' => $isViewException ? $this->throwable->getViewData() : null,
