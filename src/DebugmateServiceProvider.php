@@ -154,7 +154,7 @@ class DebugmateServiceProvider extends BaseServiceProvider
 
     protected function setLogChannel(): void
     {
-        config('logging.channels.debugmate.driver', 'debugmate');
-        config('logging.channels.stack.channels', ['stack', 'debugmate']);
+        config(['logging.channels.debugmate.driver' => 'debugmate']);
+        config(['logging.channels.stack.channels' => ['stack', 'debugmate']]);
     }
 }
