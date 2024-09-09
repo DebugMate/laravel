@@ -29,6 +29,7 @@ class DebugmateServiceProvider extends BaseServiceProvider
 
         $this->registerErrorHandler();
         $this->registerContexts();
+        $this->setLogChannel();
     }
 
     public function boot(): void
@@ -149,5 +150,11 @@ class DebugmateServiceProvider extends BaseServiceProvider
         }
 
         return $logLevel;
+    }
+
+    protected function setLogChannel(): void
+    {
+        config('logging.channels.debugmate.driver', 'debugmate');
+        config('logging.channels.stack.channels', ['stack', 'debugmate']);
     }
 }
