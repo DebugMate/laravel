@@ -1,6 +1,6 @@
 <?php
 
-namespace Cockpit\Context\Livewire;
+namespace Debugmate\Context\Livewire;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -36,7 +36,7 @@ class LivewireInformationV3
                 'message' => $throwable->getMessage()
             ];
 
-            Log::info('Cockpit - Couldn\'t get livewire class:', $context);
+            Log::info('Debugmate - Couldn\'t get livewire class:', $context);
         }
 
         return [

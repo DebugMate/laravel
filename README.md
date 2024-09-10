@@ -8,58 +8,58 @@
     </a>
 </p>
 
-Cockpit is a beautiful error tracking package that will help your software team to track and fix errors.
+DebugMate is a beautiful error tracking package that will help your software team to track and fix errors.
 
 ## Table Of Compatibility
-| Laravel Version   | Cockpit Version |
-|-------------------|-----------------|
-| ^10               | ^2.0            |
-| ^11               | ^3.0            |
+| Laravel Version   | DebugMate Version |
+|-------------------|-------------------|
+| ^10               | ^2.0              |
+| ^11               | ^3.0              |
 
 #### Now you can install the package:
 
 ```bash
-composer require devsquad-cockpit/laravel
+composer require debugmate/laravel
 ```
 
 #### Run the following command to install the package files:
 
 ```bash
-php artisan cockpit:install
+php artisan debugmate:install
 ```
 
-#### Configuring cockpit connection
-After the installation, you should configure the connection with cockpit main application.
+#### Configuring DebugMate connection
+After the installation, you should configure the connection with DebugMate main application.
 Open your `.env` file and check for this new env vars:
 
 ```env
-COCKPIT_DOMAIN=
-COCKPIT_ENABLED=
-COCKPIT_TOKEN=
+DEBUGMATE_DOMAIN=
+DEBUGMATE_ENABLED=
+DEBUGMATE_TOKEN=
 ```
-__`COCKPIT_DOMAIN`__: You must set your cockpit domain on this var. This way, our package will know where it should send the error data.
-If your cockpit instance runs on a port different than the 80 or 443, you should add it too. E.g.: `http://cockpit.mydomain.com:9001`.
+__`DEBUGMATE_DOMAIN`__: You must set your DebugMate domain on this var. This way, our package will know where it should send the error data.
+If your DebugMate instance runs on a port different than the 80 or 443, you should add it too. E.g.: `http://debugmate.mydomain.com:9001`.
 
-__`COCKPIT_ENABLED`__: With this var, you can control if cockpit features will be available or not.
+__`DEBUGMATE_ENABLED`__: With this var, you can control if DebugMate features will be available or not.
 
-__`COCKPIT_TOKEN`__: On this var, you should set the project token. With this, you instruct cockpit
+__`DEBUGMATE_TOKEN`__: On this var, you should set the project token. With this, you instruct DebugMate
 in which project the errors will be attached.
 
 ## Reporting unhandled exceptions
-You need to add the Cockpit as a log-channel by adding the following config to the channels section in config/logging.php:
+You need to add the DebugMate as a log-channel by adding the following config to the channels section in config/logging.php:
 
 ```php
 'channels' => [
     // ...
-    'cockpit' => [
-        'driver' => 'cockpit',
+    'debugmate' => [
+        'driver' => 'debugmate',
     ],
 ],
 ```
 After that you need to fill it on `LOG_STACK` env:
 
 ```php
-LOG_STACK=cockpit
+LOG_STACK=debugmate
 ```
 
 ## Testing if everything works
@@ -67,5 +67,5 @@ LOG_STACK=cockpit
 By the end you're being able to send a fake exception to test connection
 
 ```php
-php artisan cockpit:test
+php artisan debugmate:test
 ```

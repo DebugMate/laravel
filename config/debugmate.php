@@ -6,20 +6,20 @@ return [
      | Status
      |--------------------------------------------------------------------------
      |
-     | This setting controls the Cockpit status.
+     | This setting controls the Debugmate status.
      |
      */
-    'enabled' => env('COCKPIT_ENABLED', true),
+    'enabled' => env('DEBUGMATE_ENABLED', true),
 
     /*
      |--------------------------------------------------------------------------
      | Domain
      |--------------------------------------------------------------------------
      |
-     | This setting refers to the domain (base URL) of the Cockpit.
+     | This setting refers to the domain (base URL) of the Debugmate.
      |
      */
-    'domain' => env('COCKPIT_DOMAIN'),
+    'domain' => env('DEBUGMATE_DOMAIN'),
 
     /*
      |--------------------------------------------------------------------------
@@ -27,8 +27,8 @@ return [
      |--------------------------------------------------------------------------
      |
      | This setting refers to the token related with the project
-     | in the Cockpit where the errors will be registered.
+     | in the Debugmate where the errors will be registered.
      |
      */
-    'token' => env('COCKPIT_TOKEN'),
+    'token' => env('DEBUGMATE_TOKEN'),
 ];
