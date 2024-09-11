@@ -1,5 +1,5 @@
 {
-    "name": "devsquad-cockpit/laravel",
+    "name": "debugmate/laravel",
     "description": "A Freemium package to help you tracking the project errors",
     "license": "MIT",
     "minimum-stability": "dev",
