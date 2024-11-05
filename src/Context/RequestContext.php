@@ -1,8 +1,8 @@
 <?php
 
-namespace Cockpit\Context;
+namespace Debugmate\Context;
 
-use Cockpit\Interfaces\ContextInterface;
+use Debugmate\Interfaces\ContextInterface;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;

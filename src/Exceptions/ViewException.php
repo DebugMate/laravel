@@ -1,9 +1,9 @@
 <?php
 
-namespace Cockpit\Exceptions;
+namespace Debugmate\Exceptions;
 
-use Cockpit\Context\Dump\HtmlDumper;
-use Cockpit\Interfaces\ContextInterface;
+use Debugmate\Context\Dump\HtmlDumper;
+use Debugmate\Interfaces\ContextInterface;
 use ErrorException;
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cockpit\Context\Dump;
+namespace Debugmate\Context\Dump;
 
 /**
  * @see https://github.com/spatie/laravel-ignition

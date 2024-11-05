@@ -1,6 +1,6 @@
 <?php
 
-namespace Cockpit\Interfaces;
+namespace Debugmate\Interfaces;
 
 interface ContextInterface
 {
