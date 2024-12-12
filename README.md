@@ -1,12 +1,5 @@
-<p align="center">
-    <img src="https://github.com/devsquad-cockpit/laravel/blob/develop/cockpit-logo.png?raw=true" alt="Cockpit" title="Cockpit" width="300"/>
-</p>
 
-<p align="center" style="margin-top: 6px; margin-bottom: 10px;">
-    <a href="https://devsquad.com">
-        <img src="https://github.com/devsquad-cockpit/laravel/blob/develop/devsquad-logo.png?raw=true" alt="DevSquad" title="DevSquad" width="150"/>
-    </a>
-</p>
+# Laravel
 
 DebugMate is a beautiful error tracking package that will help your software team to track and fix errors.
 
@@ -19,7 +12,7 @@ DebugMate is a beautiful error tracking package that will help your software tea
 #### Now you can install the package:
 
 ```bash
-composer require debugmate/laravel
+composer require debugmate/laravel:dev-main
 ```
 
 #### Run the following command to install the package files:
