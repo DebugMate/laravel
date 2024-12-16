@@ -12,7 +12,7 @@ DebugMate is a beautiful error tracking package that will help your software tea
 #### Now you can install the package:
 
 ```bash
-composer require debugmate/laravel:dev-main
+composer require debugmate/laravel
 ```
 
 #### Run the following command to install the package files:
